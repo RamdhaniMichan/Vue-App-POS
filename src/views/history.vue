@@ -10,7 +10,7 @@
         <b-container>
             <div class="left-bar" id="left-bar">
                 <ul>
-                    <li><router-link to="/"><img class="icon" src="../assets/images/fork.png" alt=""></router-link></li>
+                    <li><router-link to="/home"><img class="icon" src="../assets/images/fork.png" alt=""></router-link></li>
                     <li><router-link to="/history"><img class="icon" src="../assets/images/clipboard.png" alt=""></router-link></li>
                     <li><router-link to="/add"><img class="icon" src="../assets/images/add.png" alt=""></router-link></li>
                 </ul>
@@ -20,23 +20,54 @@
             <div class="content">
                 <b-row>
                     <b-col>
-                        <div class="card-1"></div>
+                        <div class="card-1">
+                            <div class="ellipse1"></div>
+                            <div class="ellipse2"></div>
+                            <div class="ellipse3"></div>
+                            <div class="text1">
+                                <p><strong>Today's Income</strong></p>
+                                <p><strong>Rp. 1.000.000</strong></p>
+                                <p><strong>+2% Yesterday</strong></p>
+                            </div>
+                        </div>
                     </b-col>
                     <b-col>
-                        <div class="card-2"></div>
+                        <div class="card-2">
+                            <div class="ellipse1"></div>
+                            <div class="ellipse2"></div>
+                            <div class="ellipse3"></div>
+                             <div class="text1">
+                                <p><strong>Orders</strong></p>
+                                <p><strong>150</strong></p>
+                                <p><strong>+2% Yesterday</strong></p>
+                            </div>
+                        </div>
                     </b-col>
                     <b-col>
-                        <div class="card-3"></div>
+                        <div class="card-3">
+                            <div class="ellipse1"></div>
+                            <div class="ellipse2"></div>
+                            <div class="ellipse3"></div>
+                             <div class="text1">
+                                <p><strong>This Years Income</strong></p>
+                                <p><strong>Rp. 10.000.000</strong></p>
+                                <p><strong>+2% Yesterday</strong></p>
+                            </div>
+                        </div>
                     </b-col>
                 </b-row>
                 <b-row>
                     <b-col>
-                        <div class="graph"></div>
+                        <div class="graph">
+                            <img class="ss" src="../assets/ss.png" alt="">
+                        </div>
                     </b-col>
                 </b-row>
                 <b-row>
                     <b-col>
-                        <div class="box"></div>
+                        <div class="box">
+                            <b-table striped hover :items="items"></b-table>
+                        </div>
                     </b-col>
                 </b-row>
             </div>
@@ -45,9 +76,29 @@
 </template>
 
 <script>
-
+import axios from "axios"
 export default {
     name: "history",
+    data() {
+        return {
+            items: []
+        }
+    },
+    async mounted() {
+     await axios
+            .get(process.env.VUE_APP_URL + 'history', {
+                headers: {
+                    'authtoken': localStorage.getItem('token')
+                }
+            })
+            .then(response => 
+                {
+                   this.items = response.data.result
+                }
+            )
+            .catch(err => {this.items = err})
+
+    }
 }
 </script>
 
@@ -85,7 +136,7 @@ body {
 }
 
 .header-text {
-    margin: 2.5em 0em 0em 39em;
+    margin: 2.5em 0em 0em 44em;
 }
 
 .header-text p {
@@ -126,10 +177,15 @@ li {
 .content {
     position: absolute;
     width: 100%;
-    height: 1000px;
+    height: auto;
     left: 109px;
     top: 100px;
     background-color: #E5E5E5;
+}
+
+.ss {
+    width: 1283px;
+    height: 245px;
 }
 
 .card-1 {
@@ -170,7 +226,7 @@ li {
 
 .graph {
     position: absolute;
-    width: 1106px;
+    width: 1285px;
     height: 250px;
     left: 85px;
     top: 257px;
@@ -182,8 +238,8 @@ li {
 
 .box {
     position: absolute;
-    width: 1103px;
-    height: 209px;
+    width: 1285px;
+    height: auto;
     left: 86px;
     top: 560px;
 
@@ -200,65 +256,40 @@ li {
     padding: 30px 80px;
 }
 
-.cart {
-    position: fixed;
-    width: 491px;
-    height: 96px;
-    left: 999px;
-    top: 0px;
-
-    background: #FFFFFF;
-    box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
+.text1 {
+    margin: 30px 40px;
 }
 
-.cart-text {
-    margin: 2em 0em 0em 7.5em;
-    font-size: larger;
-    font-weight: bold;
-
-}
-
-.cart-content {
-    position: fixed;
-    width: 490px;
-    height: 800px;
-    left: 1002px;
-    top: 100px;
-
-    background: #FFFFFF;
-    border: 1px solid #CECECE;
-}
-
-.cart-content-icon {
+.ellipse1 {
     position: absolute;
-    width: 200px;
-    height: 200px;
-    left: 75px;
-    top: 100px;
+    width: 80px;
+    height: 80px;
+    left: 196px;
+    top: 4px;
+    border-radius: 100%;
+
+    background: rgba(253, 211, 228, 0.3);
 }
 
-.cart-content-text {
+.ellipse2 {
     position: absolute;
-    width: 371px;
-    height: 60px;
-    left: -30px;
-    top: 165px;
+    width: 80px;
+    height: 80px;
+    left: 177px;
+    top: 28px;
+    border-radius: 100%;
 
-    font-size: 30px;
-    line-height: 39px;
-
-    color: #000000;
+    background: rgba(253, 211, 228, 0.3);
 }
 
-.cart-content-text-sub {
+.ellipse3 {
     position: absolute;
-    width: 371px;
-    height: 60px;
-    left: -52px;
-    top: 195px;
+    width: 80px;
+    height: 80px;
+    left: 145px;
+    top: 63px;
+    border-radius: 100%;
 
-    font-size: 16px;
-    line-height: 39px;
-    color: #CECECE;
+    background: rgba(253, 211, 228, 0.3);
 }
 </style>

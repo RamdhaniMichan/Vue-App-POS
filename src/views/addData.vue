@@ -11,7 +11,7 @@
             <div class="left-bar" id="left-bar">
                 <ul>
                     <li>
-                        <router-link to="/"><img class="icon" src="../assets/images/fork.png" alt=""></router-link>
+                        <router-link to="/home"><img class="icon" src="../assets/images/fork.png" alt=""></router-link>
                     </li>
                     <li>
                         <router-link to="/history"><img class="icon" src="../assets/images/clipboard.png" alt="">
@@ -309,7 +309,7 @@
     }
 
     .header-text {
-        margin: 2.5em 0em 0em 39em;
+        margin: 2.5em 0em 0em 44em;
     }
 
     .header-text p {
@@ -350,7 +350,7 @@
     .content {
         position: absolute;
         width: 100%;
-        height: 800px;
+        height: auto;
         left: 109px;
         top: 100px;
         background: rgba(190, 195, 202, 0.3);

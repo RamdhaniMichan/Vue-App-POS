@@ -9,17 +9,14 @@
                     <p>Food Items</p>
                 </div>
                 <div class="header-search-icon">
-                    <img src="../assets/images/magnifying-glass.png" alt="search" @click="search(cari)">
-                </div>
-                <div class="head-search">
-                    <input type="text" placeholder="cariii" v-model="cari">
+                    <img src="../assets/images/magnifying-glass.png" alt="search" @click="hello=!hello">
                 </div>
             </div>
         </b-container>
         <b-container>
             <div class="left-bar" id="left-bar">
                 <ul>
-                    <li><router-link to="/"><img class="icon" src="../assets/images/fork.png" alt=""></router-link></li>
+                    <li><router-link to="/home"><img class="icon" src="../assets/images/fork.png" alt=""></router-link></li>
                     <li><router-link to="/history"><img class="icon" src="../assets/images/clipboard.png" alt=""></router-link></li>
                     <li><router-link to="/add"><img class="icon" src="../assets/images/add.png" alt=""></router-link></li>
                 </ul>
@@ -28,9 +25,17 @@
         <b-container>
             <div class="content">
                 
-                <div class="b">
-                    <input type="range" min="0" max="100000" v-model="max" />
-                    <p>{{max}}</p>
+                <div class="box" v-show="hello">
+                    <b-container class="bv-example-row">
+                        <b-row>
+                            <b-col>
+                                <input type="range" min="0" max="100000" v-model="max" />
+                                <p>{{max}}</p>
+                            </b-col>
+                            <b-col><input type="text" placeholder="cariii" v-model="cari"></b-col>
+                        </b-row>
+                    </b-container>
+                    
                 </div>
                 <b-row>
                     <div class="" v-for="datas in filter" :key="datas.id">
@@ -83,6 +88,8 @@
                                     :image = datas.image
                                  />
                             </div>
+                            <div class="btn-group">
+                    </div>
                         </b-col>
                     </b-row>
                     <div class="cart-bottom">
@@ -134,6 +141,8 @@ export default {
             cart: [],
             max: 100000,
             cari: '',
+            hello: true,
+            jumlah: 0,
             checkout: {
                 chasier: 'michan',
                 amount: 0,
@@ -162,7 +171,6 @@ export default {
             })
             .then((res) => {console.log(res)})
         },
-
         cancel() {
             this.cart = []
         },
@@ -197,7 +205,7 @@ export default {
             )
             .catch(err => {this.items = err})
 
-    }
+    },
 }
 </script>
 
@@ -212,6 +220,14 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.box {
+    background-color: white;
+    position: relative;
+    width: 40em;
+    height: 4em;
+    margin: 11px 155px;
 }
 
 .header {
@@ -235,7 +251,7 @@ body {
 }
 
 .header-text {
-    margin: 2.5em 0em 0em 28em;
+    margin: 2.5em 0em 0em 30em;
 }
 
 .header-text p {
@@ -247,12 +263,12 @@ body {
     position: absolute;
     width: 35.35px;
     height: 35px;
-    left: 934.14px;
+    left: 981.14px;
     top: 35px;
 }
 
 .head-search {
-    margin: -3rem 38rem;
+    margin: -3rem 41rem;
 }
 
 .left-bar {

@@ -44,12 +44,19 @@
             },
         },
         methods: {
+            qty(){
+                this.$emit('qty', this.jumlah)
+            },
             plus() {
                 let x = this.jumlah++
                 x * this.price
             },
             less(){
-                this.jumlah--
+                if (this.jumlah === 1){
+                    alert('tidak boleh kurang dari 1')
+                } else {
+                    this.jumlah--
+                }
             }
         }
     }
