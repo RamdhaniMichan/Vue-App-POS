@@ -1,4 +1,7 @@
-# frontend
+# Vue App POS
+
+## Image Preview
+[![](https://i.ibb.co/xX38SHv/Screenshot-from-2021-01-11-08-47-55.png)]()
 
 ## Project setup
 ```
